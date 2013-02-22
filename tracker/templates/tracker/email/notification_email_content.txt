@@ -1,0 +1,37 @@
+Dear {{ user_name }},<br> <br>
+    Please find the list of product which is going to expire or expired.<br><br><br>
+<table width="100%" border="1" style="font-family: verdana,arial,sans-serif;
+	font-size:12px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;" cellspacing="10">
+  <tr style="background-color:#d4e3e5;">
+    <th height="25">Item</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Purchase Date</th>
+    <th>Expiry Date</th>
+    <th>Bill No.</th>
+    <th>Price</th>
+    <th>Shop</th>
+  </tr>
+  {% for p in products %}
+  <tr style="background-color: {% if now > p.expiry_date %} #ff5d5d {% elif now == p.expiry_date %} orange {% else %} #e0f6b5 {% endif %};">
+      <td height="20">{{ p.name }}</td>
+      <td>{{ p.typ }}</td>
+      <td>{{ p.description }}</td>
+      <td>{{ p.purchase_date }}</td>
+      <td>{{ p.expiry_date }}</td>
+      <td>{{ p.bill_no }}</td>
+      <td>{{ p.price }}</td>
+      <td>{{ p.shop.name }}</td>
+    </tr>
+  {% endfor %}
+</table>
+<br><br>
+If you want to stop notification of a product, please login to the application and uncheck "Notify me" option or delete it.<br><br>
+Regards,<br>
+Admin
+  
+

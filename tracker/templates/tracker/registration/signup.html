@@ -1,0 +1,39 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+{% load url from future %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />
+  <style>
+    .panel {
+      padding-left: 25px;
+    }
+  </style>
+{% endblock %}
+
+{% block bodyclass %}login{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block breadcrumbs %} {% endblock breadcrumbs %}
+
+{% block content %}
+
+  <h1 id="analytics-header">Signup</h1>
+  <div class="panel">
+  {% if form %}
+    <form action="." method="post">{% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Sign Up" />
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+  {% endif %}
+  {% if new_user %}
+  Successfully created account for {{ new_user.get_full_name }}. Please <a href="/admin/">Log in</a> here.
+  {% endif %}
+  </div>
+
+{% endblock %}
